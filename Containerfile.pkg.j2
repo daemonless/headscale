@@ -35,10 +35,12 @@ RUN pkg install -y ${PACKAGES} && \
       -e 's|grpc_listen_addr: 127.0.0.1:50443|grpc_listen_addr: 0.0.0.0:50443|' \
       -e 's|/var/lib/headscale/|/config/|g' \
       -e 's|/var/db/headscale/|/config/|g' \
+      -e '/controlplane\.tailscale\.com/d' \
+      -e '/^derp:/,/^[a-z]/ s|enabled: false|enabled: true|' \
       /defaults/config.yaml
 
 COPY root/ /
 RUN chmod +x /etc/services.d/headscale/run /healthz /etc/cont-init.d/20-headscale-config
 
-EXPOSE 8080 9090 50443
+EXPOSE 8080 9090 50443 3478/udp
 VOLUME /config

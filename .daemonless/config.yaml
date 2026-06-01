@@ -26,3 +26,4 @@ cit:
   mode: health
   port: 8080
   health: /health
+  ready: "listening and serving HTTP"

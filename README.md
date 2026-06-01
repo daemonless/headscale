@@ -46,6 +46,7 @@ services:
       - "/path/to/containers/headscale:/config"
     ports:
       - 8080:8080
+      - 3478:3478
     restart: unless-stopped
 ```
 
@@ -98,6 +99,7 @@ OPTION from=ghcr.io/daemonless/headscale:${tag}
 ```bash
 podman run -d --name headscale \
   -p 8080:8080 \
+  -p 3478:3478 \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=UTC \
@@ -120,6 +122,7 @@ podman run -d --name headscale \
       TZ: "UTC"
     ports:
       - "8080:8080"
+      - "3478:3478"
     volumes:
       - "/path/to/containers/headscale:/config"
 ```
@@ -145,6 +148,7 @@ podman run -d --name headscale \
 | Port | Protocol | Description |
 |------|----------|-------------|
 | `8080` | TCP | Control server (HTTP) |
+| `3478` | UDP | Embedded DERP STUN (UDP) |
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)

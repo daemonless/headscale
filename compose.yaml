@@ -21,6 +21,7 @@ x-daemonless:
       /config: "Configuration directory"
     ports:
       8080: "Control server (HTTP)"
+      3478: "Embedded DERP STUN (UDP)"
 
 services:
   headscale:
@@ -39,3 +40,4 @@ services:
 
     ports:
       - 8080:8080
+      - 3478:3478/udp
