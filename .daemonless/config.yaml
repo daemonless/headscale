@@ -1,0 +1,28 @@
+# dbuild configuration file
+# Place in .daemonless/config.yaml or .dbuild.yaml (higher priority)
+#
+# Full reference: https://github.com/daemonless/dbuild
+
+icon: ':simple-tailscale:'
+
+build:
+  variants:
+    - tag: latest
+      containerfile: Containerfile
+      default: true
+      tag_desc: "Built from the official upstream FreeBSD release binary."
+    - tag: pkg
+      containerfile: Containerfile.pkg
+      pkg_name: headscale
+      tag_desc: "Installed from the FreeBSD quarterly package repository."
+    - tag: pkg-latest
+      containerfile: Containerfile.pkg
+      pkg_name: headscale
+      args:
+        BASE_VERSION: "15-latest"
+      tag_desc: "Installed from the FreeBSD latest package repository."
+
+cit:
+  mode: health
+  port: 8080
+  health: /health

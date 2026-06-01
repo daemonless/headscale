@@ -1,0 +1,44 @@
+ARG BASE_VERSION=15
+FROM ghcr.io/daemonless/base:${BASE_VERSION}
+
+ARG FREEBSD_ARCH=amd64
+ARG PACKAGES="headscale"
+
+LABEL org.opencontainers.image.title="Headscale" \
+      org.opencontainers.image.description="An open source, self-hosted implementation of the Tailscale control server." \
+      org.opencontainers.image.source="https://github.com/daemonless/headscale" \
+      org.opencontainers.image.url="https://headscale.net/" \
+      org.opencontainers.image.documentation="https://headscale.net/stable/" \
+      org.opencontainers.image.licenses="BSD-3-Clause" \
+      org.opencontainers.image.vendor="daemonless" \
+      org.opencontainers.image.authors="daemonless" \
+      io.daemonless.category="Networking" \
+      io.daemonless.port="8080" \
+      io.daemonless.volumes="/config" \
+      io.daemonless.arch="${FREEBSD_ARCH}" \
+      io.daemonless.pkg-name="headscale" \
+      io.daemonless.healthcheck-url="http://localhost:8080/health" \
+      io.daemonless.pkg-source="pkg" \
+      io.daemonless.packages="${PACKAGES}"
+
+# Install headscale from the FreeBSD package repository and retarget its config
+# sample (data/keys -> /config, listeners -> 0.0.0.0).
+RUN pkg install -y ${PACKAGES} && \
+    pkg clean -ay && \
+    rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
+    mkdir -p /app /defaults && \
+    pkg query '%v' headscale | sed 's/_[0-9]*$//' > /app/version && \
+    cp /usr/local/etc/headscale/config.yaml.sample /defaults/config.yaml && \
+    sed -i '' \
+      -e 's|listen_addr: 127.0.0.1:8080|listen_addr: 0.0.0.0:8080|' \
+      -e 's|metrics_listen_addr: 127.0.0.1:9090|metrics_listen_addr: 0.0.0.0:9090|' \
+      -e 's|grpc_listen_addr: 127.0.0.1:50443|grpc_listen_addr: 0.0.0.0:50443|' \
+      -e 's|/var/lib/headscale/|/config/|g' \
+      -e 's|/var/db/headscale/|/config/|g' \
+      /defaults/config.yaml
+
+COPY root/ /
+RUN chmod +x /etc/services.d/headscale/run /healthz /etc/cont-init.d/20-headscale-config
+
+EXPOSE 8080 9090 50443
+VOLUME /config

@@ -1,0 +1,41 @@
+name: headscale
+
+x-daemonless:
+  title: "Headscale"
+  icon: ":simple-tailscale:"
+  category: "Networking"
+  description: "An open source, self-hosted implementation of the Tailscale control server."
+  upstream_url: "https://github.com/juanfont/headscale"
+  web_url: "https://headscale.net/"
+  user: "bsd"
+  mlock: false
+  community: "Discord:https://discord.gg/Kb9tkhecZT"
+  appjail: true
+
+  docs:
+    env:
+      PUID: "User ID for the application process"
+      PGID: "Group ID for the application process"
+      TZ: "Timezone for the container"
+    volumes:
+      /config: "Configuration directory"
+    ports:
+      8080: "Control server (HTTP)"
+
+services:
+  headscale:
+    image: ghcr.io/daemonless/headscale:latest
+    container_name: headscale
+    restart: unless-stopped
+
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+
+    volumes:
+      - /path/to/containers/headscale:/config
+
+    ports:
+      - 8080:8080

@@ -1,0 +1,14 @@
+#!/bin/sh
+# Initialize headscale config on first run
+mkdir -p /config /var/run/headscale
+
+if [ ! -f /config/config.yaml ]; then
+    cp /defaults/config.yaml /config/config.yaml
+    echo "[headscale] Created /config/config.yaml — set 'server_url' to your reachable URL"
+fi
+
+# Let the `headscale` CLI find the config in its default search path (no -c needed)
+mkdir -p /etc/headscale
+ln -sf /config/config.yaml /etc/headscale/config.yaml
+
+chown -R bsd:bsd /config /var/run/headscale
