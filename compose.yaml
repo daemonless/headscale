@@ -3,7 +3,7 @@ name: headscale
 x-daemonless:
   title: "Headscale"
   icon: ":simple-tailscale:"
-  category: "Networking"
+  category: "Network"
   description: "An open source, self-hosted implementation of the Tailscale control server."
   upstream_url: "https://github.com/juanfont/headscale"
   web_url: "https://headscale.net/"
@@ -28,7 +28,6 @@ services:
     image: ghcr.io/daemonless/headscale:latest
     container_name: headscale
     restart: unless-stopped
-
 
     environment:
       - PUID=1000
