@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-27T16:40:15Z",
+  "generated": "2026-07-03T16:12:43Z",
   "image": "headscale",
   "tags": {
     "latest": {
-      "app_version": "0.29.1",
+      "app_version": "0.29.2",
       "arch": "amd64",
-      "generated": "2026-06-27T16:37:22Z",
+      "generated": "2026-07-03T16:10:04Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -27,7 +27,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.0"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -107,7 +107,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -115,7 +115,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-zlib",
@@ -385,7 +385,7 @@
           },
           {
             "name": "github.com/juanfont/headscale",
-            "version": "v0.29.1"
+            "version": "v0.29.2"
           },
           {
             "name": "github.com/kamstrup/intmap",
@@ -688,7 +688,7 @@
     "pkg": {
       "app_version": "0.27.1_6",
       "arch": "amd64",
-      "generated": "2026-06-27T16:39:02Z",
+      "generated": "2026-07-03T16:09:53Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -710,7 +710,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.0"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -778,7 +778,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -790,7 +790,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -798,7 +798,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-zlib",
@@ -1355,7 +1355,7 @@
     "pkg-latest": {
       "app_version": "0.27.1_6",
       "arch": "amd64",
-      "generated": "2026-06-27T16:37:50Z",
+      "generated": "2026-07-03T16:11:27Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1377,7 +1377,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.0"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -1445,7 +1445,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -1457,7 +1457,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -1465,7 +1465,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-zlib",
@@ -1489,7 +1489,7 @@
           },
           {
             "name": "jq",
-            "version": "1.8.1"
+            "version": "1.8.2"
           },
           {
             "name": "oniguruma",
