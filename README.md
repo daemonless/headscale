@@ -18,15 +18,13 @@ An open source, self-hosted implementation of the Tailscale control server.
 | **Website** | [https://headscale.net/](https://headscale.net/) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` | Built from the official upstream FreeBSD release binary. | Most users. Matches Linux Docker behavior. |
+| `latest` | Built from the official upstream FreeBSD release binary. | Most users — recommended. |
 | `pkg` | Installed from the FreeBSD quarterly package repository. | Alternative build. |
 | `pkg-latest` | Installed from the FreeBSD latest package repository. | Alternative build. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -36,25 +34,26 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   headscale:
-    image: ghcr.io/daemonless/headscale:latest
+    image: "ghcr.io/daemonless/headscale:latest"
     container_name: headscale
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
+      - PUID=1000  # User ID for the application process
+      - PGID=1000  # Group ID for the application process
+      - TZ=UTC  # Timezone for the container
     volumes:
       - "/path/to/containers/headscale:/config"
     ports:
-      - 8080:8080
-      - 3478:3478
+      - "8080:8080"
+      - "3478:3478"
     restart: unless-stopped
 ```
 
 ### AppJail Director
-
 **.env**:
 
 ```
+# .env
+
 DIRECTOR_PROJECT=headscale
 PUID=1000
 PGID=1000
@@ -64,6 +63,8 @@ TZ=UTC
 **appjail-director.yml**:
 
 ```yaml
+# appjail-director.yml
+
 options:
   - virtualnet: ':<random> default'
   - nat:
@@ -72,6 +73,8 @@ services:
     name: headscale
     options:
       - container: 'boot args:--pull'
+      - expose: '8080:8080 proto:tcp'
+      - expose: '3478:3478 proto:udp'
     oci:
       user: root
       environment:
@@ -88,11 +91,14 @@ volumes:
 **Makejail**:
 
 ```
+# Makejail
+
 ARG tag=latest
 
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/headscale:${tag}
 ```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
 
@@ -107,13 +113,31 @@ podman run -d --name headscale \
   ghcr.io/daemonless/headscale:latest
 ```
 
+### AppJail
+
+```bash
+appjail oci run -Pd \
+  -o overwrite=force \
+  -o container="args:--pull" \
+  -o virtualnet=":<random> default" \
+  -o nat \
+  -o expose="8080:8080 proto:tcp" \
+  -o expose="3478:3478 proto:udp" \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=UTC \
+  -o fstab="/path/to/containers/headscale /config <pseudofs>" \
+  ghcr.io/daemonless/headscale:latest headscale
+```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
 ### Ansible
 
 ```yaml
 - name: Deploy headscale
   containers.podman.podman_container:
     name: headscale
-    image: ghcr.io/daemonless/headscale:latest
+    image: "ghcr.io/daemonless/headscale:latest"
     state: started
     restart_policy: always
     env:
@@ -126,6 +150,8 @@ podman run -d --name headscale \
     volumes:
       - "/path/to/containers/headscale:/config"
 ```
+
+Access at: `http://localhost:8080`
 
 ## Parameters
 
@@ -152,7 +178,7 @@ podman run -d --name headscale \
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15
 
 ---
 
