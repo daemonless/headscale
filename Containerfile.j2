@@ -17,7 +17,7 @@ LABEL org.opencontainers.image.title="Headscale" \
       io.daemonless.volumes="/config" \
       io.daemonless.arch="${FREEBSD_ARCH}" \
       io.daemonless.upstream-url="${UPSTREAM_URL}" \
-      io.daemonless.upstream-jq=".tag_name | sub(\"^v\"; \"\")" \
+      io.daemonless.upstream-jq='.tag_name | sub("^v"; "")' \
       io.daemonless.healthcheck-url="http://localhost:8080/health" \
       io.daemonless.pkg-source="binary"
 
