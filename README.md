@@ -42,7 +42,7 @@ services:
       - PGID=1000  # Group ID for the application process
       - TZ=UTC  # Timezone for the container
     volumes:
-      - "/path/to/containers/headscale:/config"
+      - "/containers/headscale:/config"
     ports:
       - "8080:8080"
       - "3478:3478"
@@ -89,7 +89,7 @@ services:
       - headscale: /config
 volumes:
   headscale:
-    device: '/path/to/containers/headscale'
+    device: '/containers/headscale'
 ```
 
 **Makejail**:
@@ -105,47 +105,6 @@ OPTION from=ghcr.io/daemonless/headscale:${tag}
 ```
 
 Save the files above, then run `appjail-director up`.
-
-
-> [!WARNING]
-> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
->
-> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
-
-### Podman CLI
-
-```bash
-podman run -d --name headscale \
-  -p 8080:8080 \
-  -p 3478:3478 \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -v /path/to/containers/headscale:/config \
-  ghcr.io/daemonless/headscale:latest
-```
-
-Save as `run.sh`, then run `sh run.sh`.
-
-### AppJail
-
-
-```bash
-appjail oci run -Pd \
-  -o overwrite=force \
-  -o container="args:--pull" \
-  -o virtualnet=":<random> default" \
-  -o nat \
-  -o expose="8080:8080 proto:tcp" \
-  -o expose="3478:3478 proto:udp" \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -o fstab="/path/to/containers/headscale /config <pseudofs>" \
-  ghcr.io/daemonless/headscale:latest headscale
-```
-
-Save the files above, then run `sh run.sh`.
 
 
 > [!WARNING]
@@ -170,41 +129,10 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - "/path/to/containers/headscale:/config"
+      - "/containers/headscale:/config"
 ```
 
-Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
-
-```bash
-bastille create -O \
-  --env PUID=1000 \
-  --env PGID=1000 \
-  --env TZ=UTC \
-  --volume /path/to/containers/headscale /config \
-  headscale ghcr.io/daemonless/headscale:latest inherit
-```
-
-### Ansible
-
-```yaml
-- name: Deploy headscale
-  containers.podman.podman_container:
-    name: headscale
-    image: "ghcr.io/daemonless/headscale:latest"
-    state: started
-    restart_policy: always
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "UTC"
-    ports:
-      - "8080:8080"
-      - "3478:3478"
-    volumes:
-      - "/path/to/containers/headscale:/config"
-```
-
-Save as `headscale-deploy.yaml`, then run `ansible-playbook headscale-deploy.yaml`.
+Save as `bastille-compose.yml`, then run `bastille up`.
 
 Access at: `http://localhost:8080`
 
