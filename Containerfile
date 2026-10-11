@@ -29,8 +29,16 @@ LABEL org.opencontainers.image.title="Headscale" \
 
 # Download the official FreeBSD release binary and retarget the example config
 # (data/keys -> /config, listeners -> 0.0.0.0).
-RUN mkdir -p /app /defaults && \
-    HS_TAG=$(fetch -qo - "${UPSTREAM_URL}" | jq -r .tag_name) && \
+RUN --mount=type=secret,id=github_token \
+    TOKEN=$(cat /run/secrets/github_token 2>/dev/null | tr -d '[:space:]' || true) && \
+    mkdir -p /app /defaults && \
+    HS_TAG=$(fetch -v -o /dev/null "https://github.com/juanfont/headscale/releases/latest" 2>&1 | sed -n 's|^.*redirect to .*/releases/tag/||p' | head -1) && \
+    if [ -z "${HS_TAG}" ]; then \
+        HS_TAG=$(HTTP_AUTH="${TOKEN:+basic:*:x-access-token:$TOKEN}" fetch -qo - "${UPSTREAM_URL}" | jq -r .tag_name); \
+    fi && \
+    if [ -z "${HS_TAG}" ] || [ "${HS_TAG}" = "null" ]; then \
+        echo "ERROR: could not resolve Headscale version (github_token bytes: $(printf %s "$TOKEN" | wc -c | tr -d ' '))" >&2; exit 1; \
+    fi && \
     HS_VER=${HS_TAG#v} && \
     fetch -qo /usr/local/bin/headscale \
       "https://github.com/juanfont/headscale/releases/download/${HS_TAG}/headscale_${HS_VER}_freebsd_${FREEBSD_ARCH}" && \
