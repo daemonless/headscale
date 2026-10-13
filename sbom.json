@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-11T22:53:44Z",
+  "generated": "2026-10-13T14:59:42Z",
   "image": "headscale",
   "tags": {
     "latest": {
-      "app_version": "0.29.4",
+      "app_version": "0.29.5",
       "arch": "amd64",
-      "generated": "2026-10-11T22:50:37Z",
+      "generated": "2026-10-13T14:58:34Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -371,12 +371,12 @@
           {
             "name": "github.com/creachadair/mds",
             "purl": "",
-            "version": "v0.29.0"
+            "version": "v0.31.0"
           },
           {
             "name": "github.com/creachadair/msync",
             "purl": "",
-            "version": "v0.8.2"
+            "version": "v0.10.1"
           },
           {
             "name": "github.com/davecgh/go-spew",
@@ -426,7 +426,7 @@
           {
             "name": "github.com/go-chi/chi/v5",
             "purl": "",
-            "version": "v5.3.0"
+            "version": "v5.4.0"
           },
           {
             "name": "github.com/go-chi/metrics",
@@ -586,7 +586,7 @@
           {
             "name": "github.com/juanfont/headscale",
             "purl": "",
-            "version": "v0.29.4"
+            "version": "v0.29.5"
           },
           {
             "name": "github.com/kamstrup/intmap",
@@ -841,7 +841,7 @@
           {
             "name": "golang.org/x/sync",
             "purl": "",
-            "version": "v0.21.0"
+            "version": "v0.24.0"
           },
           {
             "name": "golang.org/x/sys",
@@ -926,7 +926,7 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.5"
+            "version": "v1.26.8"
           },
           {
             "name": "tailscale.com",
@@ -958,7 +958,7 @@
     "pkg": {
       "app_version": "0.29.3_1",
       "arch": "amd64",
-      "generated": "2026-10-11T22:48:30Z",
+      "generated": "2026-10-13T14:59:17Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1918,7 +1918,7 @@
     "pkg-latest": {
       "app_version": "0.29.3_1",
       "arch": "amd64",
-      "generated": "2026-10-11T22:49:48Z",
+      "generated": "2026-10-13T14:59:03Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
