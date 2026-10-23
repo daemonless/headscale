@@ -1,0 +1,4 @@
+#!/bin/sh
+# Start headscale; /init has already dropped to the run user.
+
+exec /usr/local/bin/headscale serve -c /config/config.yaml

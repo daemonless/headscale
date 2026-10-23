@@ -1,5 +1,5 @@
 ARG BASE_VERSION=15
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PACKAGES="headscale"
@@ -40,7 +40,11 @@ RUN pkg install -y ${PACKAGES} && \
       /defaults/config.yaml
 
 COPY root/ /
-RUN chmod +x /etc/services.d/headscale/run /healthz /etc/cont-init.d/20-headscale-config
+RUN chmod +x /daemonless/libexec/headscale /daemonless/init.d/*
+
+CMD ["/daemonless/libexec/headscale"]
+
+RUN chmod +x /healthz
 
 EXPOSE 8080 9090 50443 3478/udp
 VOLUME /config
