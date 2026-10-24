@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-23T22:27:02Z",
+  "generated": "2026-10-24T11:56:32Z",
   "image": "headscale",
   "tags": {
     "latest": {
-      "app_version": "0.29.5",
+      "app_version": "0.29.6",
       "arch": "amd64",
-      "generated": "2026-10-23T22:26:18Z",
+      "generated": "2026-10-24T11:55:20Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -565,7 +565,7 @@
           {
             "name": "github.com/juanfont/headscale",
             "purl": "",
-            "version": "v0.29.5"
+            "version": "v0.29.6+dirty"
           },
           {
             "name": "github.com/kamstrup/intmap",
@@ -575,7 +575,7 @@
           {
             "name": "github.com/klauspost/compress",
             "purl": "",
-            "version": "v1.18.6"
+            "version": "v1.19.1"
           },
           {
             "name": "github.com/lithammer/fuzzysearch",
@@ -590,7 +590,7 @@
           {
             "name": "github.com/mattn/go-isatty",
             "purl": "",
-            "version": "v0.0.22"
+            "version": "v0.0.23"
           },
           {
             "name": "github.com/mattn/go-runewidth",
@@ -655,7 +655,7 @@
           {
             "name": "github.com/prometheus/common",
             "purl": "",
-            "version": "v0.68.1"
+            "version": "v0.69.0"
           },
           {
             "name": "github.com/prometheus/procfs",
@@ -765,7 +765,7 @@
           {
             "name": "github.com/tailscale/wireguard-go",
             "purl": "",
-            "version": "v0.0.0-20260527010701-b48af7099cad"
+            "version": "v0.0.0-20260715223240-2e01ba5b00f0"
           },
           {
             "name": "github.com/tcnksm/go-latest",
@@ -800,7 +800,7 @@
           {
             "name": "golang.org/x/crypto",
             "purl": "",
-            "version": "v0.53.0"
+            "version": "v0.57.0"
           },
           {
             "name": "golang.org/x/exp",
@@ -810,7 +810,7 @@
           {
             "name": "golang.org/x/net",
             "purl": "",
-            "version": "v0.56.0"
+            "version": "v0.60.0"
           },
           {
             "name": "golang.org/x/oauth2",
@@ -825,17 +825,17 @@
           {
             "name": "golang.org/x/sys",
             "purl": "",
-            "version": "v0.46.0"
+            "version": "v0.48.0"
           },
           {
             "name": "golang.org/x/term",
             "purl": "",
-            "version": "v0.44.0"
+            "version": "v0.46.0"
           },
           {
             "name": "golang.org/x/text",
             "purl": "",
-            "version": "v0.38.0"
+            "version": "v0.42.0"
           },
           {
             "name": "golang.org/x/time",
@@ -855,7 +855,7 @@
           {
             "name": "google.golang.org/grpc",
             "purl": "",
-            "version": "v1.81.1"
+            "version": "v1.83.2"
           },
           {
             "name": "google.golang.org/protobuf",
@@ -905,12 +905,12 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.8"
+            "version": "v1.27.3"
           },
           {
             "name": "tailscale.com",
             "purl": "",
-            "version": "v1.101.0-pre"
+            "version": "v1.102.0"
           }
         ],
         "java": [],
@@ -937,7 +937,7 @@
     "pkg": {
       "app_version": "0.29.3_2",
       "arch": "amd64",
-      "generated": "2026-10-23T22:25:21Z",
+      "generated": "2026-10-24T11:55:06Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1876,7 +1876,7 @@
     "pkg-latest": {
       "app_version": "0.29.3_2",
       "arch": "amd64",
-      "generated": "2026-10-23T22:26:30Z",
+      "generated": "2026-10-24T11:56:06Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
