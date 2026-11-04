@@ -45,7 +45,7 @@ services:
       - "/containers/headscale:/config"
     ports:
       - "8080:8080"
-      - "3478:3478"
+      - "3478:3478/udp"
     # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
     restart: always
 ```
